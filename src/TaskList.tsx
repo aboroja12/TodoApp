@@ -22,9 +22,9 @@ function TaskList(props: IProps) {
                 <tbody>
                     {props.tasks.map(task => {
                         return (
-                            <tr key={task.taskId}>
-                                <td>{task.taskId}</td>
-                                <td>{task.taskDescription}</td>
+                            <tr key={task.id}>
+                                <td>{task.id}</td>
+                                <td>{task.title}</td>
                                 <td>{task.completed}</td>  
                                 <td>
                                     <button onClick={()=>remove(task)}>Löschen</button>

@@ -5,7 +5,7 @@ export interface IProps {
     
 }
 
-const initTask = { "taskDescription": "", "taskId": 0, "completed": false};
+const initTask = { "title": "", "id": 0, "completed": false};
 function AddTaskForm(props: IProps){
     const [formValue, setFormValue] = useState(initTask);
 
@@ -27,8 +27,8 @@ function AddTaskForm(props: IProps){
                 <input
                     type="text"
                     placeholder="please input name"
-                    name="taskDescription"
-                    value={formValue.taskDescription}
+                    name="title"
+                    value={formValue.title}
                     onChange={onInputChange}
                 />
                 <button>Add new Task</button>
