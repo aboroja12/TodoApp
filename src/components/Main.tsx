@@ -56,6 +56,7 @@ const Main = () => {
       })
       .then((response) => {
         setTasks([...tasks,response.data]);
+        navigate('/');
       
       });
   }
