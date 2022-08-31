@@ -1,33 +1,31 @@
-import React, { useState } from "react";
-import logo from "./logo.svg";
-import "./App.css";
-import TaskList from "./TaskList";
-import ITask from "./Interfaces";
-import AddTaskForm from "./AddTaskForm";
-import axios from "axios";
-import { setTokenSourceMapRange } from "typescript";
-import Login from "./LoginForm";
-import { Link} from 'react-router-dom';
-import Main from './components/Main';
+import { Routes, Route } from 'react-router-dom';
+import TaskList from '../TaskList';
+import { useState } from 'react';
+import ITask from '../Interfaces';
+import axios from 'axios';
+import React from 'react';
+import AddTaskForm from '../AddTaskForm';
+import Login from '../LoginForm';
 
-const defaultTasks: Array<ITask> = [
-  { title: "Feed the cats", completed: false, id: 1 },
-  { title: "Test the software", completed: false, id: 2 },
-];
+const Main = () => {  
+    const defaultTasks: Array<ITask> = [
+        { title: "Feed the cats", completed: false, id: 1 },
+        { title: "Test the software", completed: false, id: 2 },
+      ];
 
-function App() {
-  const baseURL = "http://localhost:3000/tasks";
+      const baseURL = "http://localhost:3000/tasks";
 
   React.useEffect(() => {
     axios.get(baseURL).then((response) => {
       setTasks(response.data);
     });
   }, []);
+  
+    const [tasks, setTasks] = useState(defaultTasks);
 
-  const [tasks, setTasks] = useState(defaultTasks);
 
 
-  const [token, setToken] = useState("");
+    const [token, setToken] = useState("");
 
   function login(email:string, password:string) {
       axios.post("http://localhost:3000/auth/jwt/sign", {"email":email, "password":password}).then((response) => {
@@ -71,19 +69,17 @@ function App() {
     });
   }
 
-  return (
-    <div className="App">
-  
-     <div>
-        <ul>
-          <li><Link to='/Create'>Create Task</Link></li>
-          <li><Link to='/Login'>Login</Link></li>
-        </ul>
-        <hr />
-        <Main />       
-      </div>   
-    </div>
-  );
-}
 
-export default App;
+
+return (         
+    <Routes>
+    <Route path='/' element={<TaskList tasks={tasks} deleteTask = {deleteTask}  />} />
+    <Route path= '/Create' element= {<AddTaskForm add={addTask}/>} ></Route>
+    <Route path= '/Login' element= {<Login login={login}/>}  />
+
+  </Routes>
+);
+}
+export default Main;
+
+

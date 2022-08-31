@@ -21,7 +21,7 @@ function AddTaskForm(props: IProps){
 
     return (
         <div className="addTask">
-            <h2>Add</h2>
+            <h2>Add Task</h2>
             <form className="formAdd" onSubmit={onFormSubmit}>
                 <label>Task Description</label>
                 <input

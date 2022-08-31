@@ -27,7 +27,7 @@ function TaskList(props: IProps) {
                                 <td>{task.title}</td>
                                 <td>{task.completed}</td>  
                                 <td>
-                                    <button onClick={()=>remove(task)}>Löschen</button>
+                                    <button onClick={()=>props.deleteTask(task)}>Löschen</button>
                                 </td>
                             </tr>
                         );
