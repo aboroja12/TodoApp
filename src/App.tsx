@@ -7,7 +7,7 @@ import AddTaskForm from "./AddTaskForm";
 import axios from "axios";
 import { setTokenSourceMapRange } from "typescript";
 import Login from "./LoginForm";
-import { Link} from 'react-router-dom';
+import { Link, Navigate} from 'react-router-dom';
 import Main from './components/Main';
 
 const defaultTasks: Array<ITask> = [
@@ -55,8 +55,7 @@ function App() {
       })
       .then((response) => {
         setTasks([...tasks,response.data]);
-      
-      });
+  });
   }
 
   function deleteTask(taskToDelete: ITask) {
