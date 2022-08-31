@@ -1,4 +1,4 @@
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, useNavigate, Navigate } from 'react-router-dom';
 import TaskList from '../TaskList';
 import { useState } from 'react';
 import ITask from '../Interfaces';
@@ -12,6 +12,8 @@ const Main = () => {
         { title: "Feed the cats", completed: false, id: 1 },
         { title: "Test the software", completed: false, id: 2 },
       ];
+
+      const navigate = useNavigate();
 
       const baseURL = "http://localhost:3000/tasks";
 
@@ -30,6 +32,7 @@ const Main = () => {
   function login(email:string, password:string) {
       axios.post("http://localhost:3000/auth/jwt/sign", {"email":email, "password":password}).then((response) => {
         setToken(response.data.token);
+        navigate('/')
         });
       }
 
@@ -73,8 +76,8 @@ const Main = () => {
 
 return (         
     <Routes>
-    <Route path='/' element={<TaskList tasks={tasks} deleteTask = {deleteTask}  />} />
-    <Route path= '/Create' element= {<AddTaskForm add={addTask}/>} ></Route>
+    <Route path='/' element={token !== ''? <TaskList tasks={tasks} deleteTask = {deleteTask}  />:<Navigate to = '/Login'></Navigate>} />
+    <Route path= '/Create' element= {token !== ''?<AddTaskForm add={addTask}/>:<Navigate to = '/Login'></Navigate> } />
     <Route path= '/Login' element= {<Login login={login}/>}  />
 
   </Routes>
