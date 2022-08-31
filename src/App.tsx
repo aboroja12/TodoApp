@@ -1,12 +1,7 @@
 import React, { useState } from "react";
-import logo from "./logo.svg";
 import "./App.css";
-import TaskList from "./TaskList";
 import ITask from "./Interfaces";
-import AddTaskForm from "./AddTaskForm";
 import axios from "axios";
-import { setTokenSourceMapRange } from "typescript";
-import Login from "./LoginForm";
 import { Link, Navigate} from 'react-router-dom';
 import Main from './components/Main';
 
